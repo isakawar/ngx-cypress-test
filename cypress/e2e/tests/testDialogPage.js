@@ -18,4 +18,5 @@ describe('Dialog tab tests', function () {
     modalOverlaysPage.getCancelButton().should('be.visible')
     modalOverlaysPage.getSubmitButton().should('be.visible')
   })
+
 })
