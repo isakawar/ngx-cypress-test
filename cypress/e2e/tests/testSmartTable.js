@@ -1,10 +1,7 @@
-import LoginPageLocators from '../../common/enums/loginPageLocators.js';
-import TablesAndDatePage from "../../common/pages/tablesAndDatePage";
+import TablesAndDataPage from "../../common/pages/tablesAndDatePage";
 
-
-
-describe('Test login and Smart Table', { testIsolation: false},  () => {
-  const tablesAndDatePage = new TablesAndDatePage
+describe('Login and User Management in Smart Table Tests', { testIsolation: false},  () => {
+  const tablesAndDataPage = new TablesAndDataPage();
   const userCreateData = {
     id: 12,
     firstName: 'Vladyslav',
@@ -23,31 +20,28 @@ describe('Test login and Smart Table', { testIsolation: false},  () => {
     age: 31
   }
 
-  it('test login as user', () => {
+  it('should successfully log in as a user', () => {
     cy.loginViaUi(Cypress.env('CYPRESS_USER_EMAIL'), Cypress.env('CYPRESS_USER_PASSWORD'))
     cy.url().should('contain', '/pages')
   })
 
-  it('test add new user', () => {
-    tablesAndDatePage.openPage()
-    tablesAndDatePage.clickAddButton()
+  it('should add a new user', () => {
+    tablesAndDataPage.openPage()
+    tablesAndDataPage.clickAddButton()
 
-    tablesAndDatePage.fillUserFields(userCreateData)
-    tablesAndDatePage.clickSubmitUserData()
+    tablesAndDataPage.fillUserFields(userCreateData)
+    tablesAndDataPage.clickSubmitUserData()
 
-    tablesAndDatePage.validateUserProfileFirstLine(userCreateData)
+    tablesAndDataPage.validateUserProfileFirstLine(userCreateData)
   })
 
+  it('should edit user data', () => {
+    tablesAndDataPage.clickEditFirstUser()
+    tablesAndDataPage.clearUserFields()
 
-  it('test edit of user data', () => {
-    tablesAndDatePage.clickEditFirstUser()
-    tablesAndDatePage.clearUserFields()
+    tablesAndDataPage.fillUserFields(userEditData)
+    tablesAndDataPage.clickSubmitUserData()
 
-    tablesAndDatePage.fillUserFields(userEditData)
-    tablesAndDatePage.clickSubmitUserData()
-
-    tablesAndDatePage.validateUserProfileFirstLine(userEditData)
+    tablesAndDataPage.validateUserProfileFirstLine(userEditData)
   })
 })
-
-
