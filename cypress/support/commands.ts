@@ -16,3 +16,11 @@ Cypress.Commands.add('loginViaUi', (email, password) => {
   cy.get(LoginPageLocators.rememberMeCheckBox).click();
   cy.get(LoginPageLocators.loginInButton).click();
 });
+
+Cypress.Commands.add('assertResponse', (response, expectedStatusCode = 200) => {
+  expect(response.status).to.eq(expectedStatusCode);
+});
+
+Cypress.Commands.add('assertPostEquality', (response, expectedResponse) => {
+  expect(response.body).to.deep.eq(expectedResponse);
+});
